@@ -204,7 +204,14 @@ fi
 # RÉSUMÉ FINAL
 # -------------------------
 FINAL_COUNT=$(ls -1 glpi-backup-*.tar.gz 2>/dev/null | wc -l)
-TOTAL_SIZE=$(du -sh glpi-backup-*.tar.gz 2>/dev/null | awk '{sum += $1} END {print sum}' | numfmt --to=iec --suffix=B)
+
+# Calcul correct de l'espace total utilisé (en bytes puis conversion)
+if ls glpi-backup-*.tar.gz >/dev/null 2>&1; then
+    TOTAL_SIZE_BYTES=$(du -cb glpi-backup-*.tar.gz 2>/dev/null | tail -1 | cut -f1)
+    TOTAL_SIZE=$(echo "$TOTAL_SIZE_BYTES" | numfmt --to=iec --suffix=B)
+else
+    TOTAL_SIZE="N/A"
+fi
 
 log "🎉 Sauvegarde terminée avec succès!"
 log "📊 Résumé:"
@@ -231,3 +238,4 @@ log "   - Espace utilisé: ${TOTAL_SIZE:-N/A}"
 # fi
 
 exit 0
+
