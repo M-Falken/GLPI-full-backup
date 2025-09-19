@@ -62,19 +62,19 @@ chmod 600 ~/.my.cnf
 ```
 
 ### 3. Adapter le script
-Modifier les variables dans `backup-glpi.sh` :
+Modifier les variables dans `script-full-backup-glpi.sh` :
 - `BACKUP_DIR` → répertoire de sauvegarde local
 - `GLPI_DIR` → chemin de l'installation GLPI  
 - `DB_NAME` → nom de la base de données GLPI
 
 ### 4. Rendre le script exécutable
 ```bash
-chmod +x backup-glpi.sh
+chmod +x script-full-backup-glpi.sh
 ```
 
 ### 5. Test initial
 ```bash
-./backup-glpi.sh
+./script-full-backup-glpi.sh
 ```
 
 ## ⏰ Automatisation avec Cron
@@ -85,19 +85,19 @@ Pour lancer la sauvegarde automatiquement tous les jours à 2h du matin :
 crontab -e
 
 # Ajouter la ligne suivante
-0 2 * * * /chemin/vers/backup-glpi.sh >> /var/log/backup-glpi.log 2>&1
+0 2 * * * /chemin/vers/script-full-backup-glpi.sh >> /var/log/backup-glpi.log 2>&1
 ```
 
 ### Exemples de planification
 ```bash
 # Tous les jours à 2h du matin
-0 2 * * * /chemin/vers/backup-glpi.sh
+0 2 * * * /chemin/vers/script-full-backup-glpi.sh
 
 # Tous les dimanche à 3h du matin
-0 3 * * 0 /chemin/vers/backup-glpi.sh
+0 3 * * 0 /chemin/vers/script-full-backup-glpi.sh
 
 # Toutes les 6 heures
-0 */6 * * * /chemin/vers/backup-glpi.sh
+0 */6 * * * /chemin/vers/script-full-backup-glpi.sh
 ```
 
 ## 📊 Exemple de sortie
@@ -128,7 +128,7 @@ crontab -e
 
 ### Variables personnalisables
 ```bash
-# Dans le script backup-glpi.sh
+# Dans le script script-full-backup-glpi.sh
 MAX_BACKUPS=3              # Nombre de sauvegardes à conserver
 MYSQL_CONFIG="$HOME/.my.cnf"  # Chemin du fichier de config MySQL
 ```
