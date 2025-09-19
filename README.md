@@ -85,7 +85,7 @@ Pour lancer la sauvegarde automatiquement tous les jours à 2h du matin :
 crontab -e
 
 # Ajouter la ligne suivante
-0 2 * * * /chemin/vers/script-full-backup-glpi.sh >> /var/log/backup-glpi.log 2>&1
+0 2 * * * /chemin/vers/script-full-backup-glpi.sh >> /var/log/script-full-backup-glpi.log 2>&1
 ```
 
 ### Exemples de planification
